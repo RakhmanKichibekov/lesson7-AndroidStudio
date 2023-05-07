@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
         android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="20sp"
         android:orientation="vertical">
 
         <TextView
@@ -37,6 +37,7 @@
             android:text="City: "
             android:textColor="@color/black"
             android:textSize="20sp" />
+
         <TextView
             android:id="@+id/textRegion"
             android:layout_width="wrap_content"
@@ -76,6 +77,7 @@
             android:text="Postal: "
             android:textColor="@color/black"
             android:textSize="20sp" />
+
         <TextView
             android:id="@+id/textTimeZone"
             android:layout_width="wrap_content"
@@ -92,39 +94,79 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/textTemp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Temperature: "-->
-<!--            android:textColor="@color/purple_700"-->
-<!--            android:textSize="20sp" />-->
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <Button
+            android:id="@+id/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_marginHorizontal="10sp"
-            android:layout_marginTop="25dp"
-            android:elevation="10dp"
-            android:shadowColor="#000"
-            android:shadowDx="30"
-            android:shadowDy="50"
-            app:cardCornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextView"
-            tools:ignore="MissingConstraints">
+            android:backgroundTint="@color/cardview_dark_background"
+            android:onClick="onClick"
+            android:text="Enter" />
 
-            <Button
-                android:id="@+id/Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/cardview_dark_background"
-                android:onClick="onClick"
-                android:text="Enter" />
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/textTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textWindSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WindSpeed: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textWindDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WindDirection: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textLatitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WindSpeed: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textlongitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WindDirection: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textElevation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elevation: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: "
+            android:textColor="@color/purple_700"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/Button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:onClick="onClickWeather"
+            android:text="Weather" />
     </LinearLayout>
 
 

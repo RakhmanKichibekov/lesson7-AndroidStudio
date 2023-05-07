@@ -44,12 +44,28 @@ public class MainActivity extends AppCompatActivity {
         if (networkinfo != null && networkinfo.isConnected()) {
 
             new DownloadPageTask().execute("https://ipinfo.io/json"); // запуск нового потока
-            new DownloadPageTask().execute("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true");
 
         } else {
             Toast.makeText(this, "Нет интернета", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onClickWeather(View view) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkinfo = null;
+        if (connectivityManager != null) {
+            networkinfo = connectivityManager.getActiveNetworkInfo();
+        }
+        if (networkinfo != null && networkinfo.isConnected()) {
+
+            new DownloadPageTask2().execute("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true");
+
+        } else {
+            Toast.makeText(this, "Нет интернета", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private class DownloadPageTask extends AsyncTask<String, Void, String> {
         @SuppressLint("SetTextI18n")
@@ -86,8 +102,47 @@ public class MainActivity extends AppCompatActivity {
                 binding.textPostal.setText("Postal: " +responseJson.getString("postal"));
                 binding.textTimeZone.setText("TimeZone: " + responseJson.getString("timezone"));
                 binding.textReadMe.setText("ReadMe: " + responseJson.getString("readme"));
-                //binding.textTemp.setText("Temperature: " + responseJson.getString("latitude"));
                 Log.d(MainActivity.class.getSimpleName(), "IP: " + ip);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            super.onPostExecute(result);
+        }
+    }
+
+    private class DownloadPageTask2 extends AsyncTask<String, Void, String> {
+        @SuppressLint("SetTextI18n")
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            binding.textTemp.setText("Temperature: Загружаем...");
+        }
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                return downloadIpInfo(urls[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "error";
+            }
+        }
+        @SuppressLint("SetTextI18n")
+        @Override
+        protected void onPostExecute(String result) {
+            //binding.TextView.setText(result);
+            Log.d(MainActivity.class.getSimpleName(), result);
+            try {
+                JSONObject responseJson = new JSONObject(result);
+                Log.d(MainActivity.class.getSimpleName(), "Response: " + responseJson);
+                JSONObject weather = responseJson.getJSONObject("current_weather");
+                binding.textTemp.setText("Temperature: " + weather.getString("temperature"));
+                binding.textWindSpeed.setText("WindSpeed: " + weather.getString("windspeed"));
+                binding.textWindDirection.setText("WindDirection: " + weather.getString("winddirection"));
+                binding.textTime.setText("Time: " + weather.getString("time"));
+                binding.textLatitude.setText("Latitude: " + responseJson.getString("latitude"));
+                binding.textlongitude.setText("Longitude: " + responseJson.getString("longitude"));
+                binding.textElevation.setText("Elevation: " + responseJson.getString("elevation"));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
