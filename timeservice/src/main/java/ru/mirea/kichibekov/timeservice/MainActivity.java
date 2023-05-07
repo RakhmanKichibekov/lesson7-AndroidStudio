@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimerTask;
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 Socket socket = new Socket(host, port);
                 BufferedReader reader = SocketUtils.getReader(socket);
                 reader.readLine(); // игнорируем первую строку
-                timeResult = reader.readLine(); // считываем вторую строку
+                timeResult = reader.readLine();// считываем вторую строку
                 Log.d(TAG,timeResult);
                 socket.close();
             } catch (IOException e) {
@@ -56,13 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
             return timeResult;
         }
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 //            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 //                    "dd:MMMM:yyyy HH:mm:ss a", Locale.getDefault());
 //            String strDate = simpleDateFormat.format(result);
-            binding.TextView.setText(result);
+            binding.TextView.setText("Date: " + result.substring(6, 14) + "\n" +
+                    "Time: " + result.substring(15, 23));
             System.out.println(result);
         }
     }
